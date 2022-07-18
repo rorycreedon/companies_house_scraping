@@ -21,6 +21,8 @@ data['company_name_clean'] = data['CompanyName']
 data['company_name_clean'].replace("[\(\[].*?[\)\]]","",regex=True, inplace = True)
 
 # Clean company names
-phrases = ["!", "LTD", "?", '"', "LIMITED", "", "GROUP", "INC", "(", ")", ".", "COMPANY", "PLC"]
+phrases = ["!", "LTD", "?", '"', "LIMITED", "", "GROUP", "INC", "(", ")", ".", "COMPANY", "PLC", "HODLINGS", "LLP", ]
 for p in phrases:
     data['company_name_clean'] = data['company_name_clean'].str.replace(p,"", regex=False)
+
+# 

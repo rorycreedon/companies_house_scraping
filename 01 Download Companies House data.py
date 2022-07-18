@@ -41,3 +41,28 @@ for i in range(1, len(links)):
 
 # Save as a CSV file
 data.to_csv(path + r'\data\companies_house_data.csv', index=False)
+
+
+#temp
+
+import zipfile
+from urllib.request import urlopen
+import shutil
+import os
+
+url = 'http://download.companieshouse.gov.uk/BasicCompanyData-2022-07-01-part7_7.zip'
+file_name = 'BasicCompanyData-2022-07-01-part7_7.zip'
+
+# extracting zipfile from URL
+with urlopen(url) as response, open(file_name, 'wb') as out_file:
+    shutil.copyfileobj(response, out_file)
+
+    # extracting required file from zipfile
+    with zipfile.ZipFile(file_name) as zf:
+        zf.extract(path + r'\data\all_matches.csv')
+
+# deleting the zipfile from the directory
+os.remove('BasicCompanyData-2022-07-01-part7_7.zip')
+
+# loading data from the file
+data = pd.read_csv(path + r'\data\all_matches.csv')
